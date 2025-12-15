@@ -90,22 +90,6 @@ Check `app.py` for the exact interface; you can adapt it to your preferred front
 - **Check order status**:  
   “What’s the status of my order #1234?” → Routed to `status_agent`.
 
-### Pushing This Project to Another GitHub Repository
-
-If you want to push this existing local project to a new GitHub repo:
-
-```bash
-cd Multi-Agent_Restaurant_Chatbot
-git remote add neworigin https://github.com/your-username/new-repo.git
-git push -u neworigin main
-```
-
-Or change the existing origin:
-
-```bash
-git remote set-url origin https://github.com/your-username/new-repo.git
-git push -u origin main
-```
 
 ### License
 
