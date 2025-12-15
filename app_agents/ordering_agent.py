@@ -1,14 +1,14 @@
 """
 Ordering Agent - Handles order placement and cart management.
 """
+from typing import Any
 from agents import Agent
-
 from db.queries import (
     get_outlet_menu,
     create_order,
 )
 
-ordering_agent = Agent(
+ordering_agent = Agent[Any](
     name="OrderingAgent",
     instructions=(
         """ You are the ordering specialist. Your main goal is to successfully place orders

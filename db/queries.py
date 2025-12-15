@@ -1,4 +1,4 @@
-from datetime import datetime, time
+from datetime import datetime, time, timezone
 from typing import Any, Dict, List, Optional
 import pytz
 import sys
@@ -6,7 +6,6 @@ import os
 from agents import function_tool
 from typing import List, Literal
 from pydantic import BaseModel, ConfigDict
-
 from .connection import get_connection
 
 
@@ -367,7 +366,6 @@ class OrderItemInput(BaseModel):
 
     model_config = ConfigDict(extra="forbid")  # no unknown keys
 
-
 class CreateOrderPayload(BaseModel):
     outlet_id: int
     fulfillment_type: Literal["PICKUP", "DELIVERY"]
@@ -487,7 +485,7 @@ def create_order(payload: CreateOrderPayload) -> str:
             )
 
         # ---------- Insert into orders ----------
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         cur.execute(
             """
             INSERT INTO orders (
@@ -659,7 +657,6 @@ def get_order_status(order_id: int) -> str:
 
 
 OrderStatusLiteral = Literal[
-    "PENDING",
     "CONFIRMED",
     "IN_KITCHEN",
     "READY",
@@ -674,7 +671,6 @@ def update_order_status(order_id: int, new_status: OrderStatusLiteral) -> str:
     Update the status of an existing order.
 
     Allowed statuses:
-    - PENDING
     - CONFIRMED
     - IN_KITCHEN
     - READY

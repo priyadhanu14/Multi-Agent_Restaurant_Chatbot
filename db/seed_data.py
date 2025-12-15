@@ -1,6 +1,6 @@
 import psycopg2
 from psycopg2.extras import execute_values
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import random
 from decimal import Decimal
 
@@ -184,7 +184,7 @@ def insert_orders(cur, outlet_ids):
     """
     Create a few sample orders for random outlets.
     """
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     orders = []
 
     # create 5 sample orders
